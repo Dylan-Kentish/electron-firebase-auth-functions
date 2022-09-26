@@ -13,7 +13,7 @@ exports.createAuthToken = (request, response) => {
     const auth = getAuth();
 
     const query = request.query;
-    const oneTimeCode = query["ot-auth - code"];
+    const oneTimeCode = query["ot-auth-code"];
     const idToken = query["id-token"];
 
     const decodedToken = await auth.verifyIdToken(idToken);
