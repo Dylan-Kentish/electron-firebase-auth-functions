@@ -1,9 +1,7 @@
 const functions = require("firebase-functions");
 const app = require("express")();
 const {createAuthToken} = require("./createAuthToken");
-const cors = require("cors")({
-  origin: true,
-});
+const cors = require("cors");
 
 // Set up a whitelist and check against it:
 const whitelist = ["http://electron-authentication.firebaseapp.com"];

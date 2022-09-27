@@ -4,7 +4,7 @@ const {getFirestore, doc, setDoc} = require("firebase/firestore");
 
 initializeApp();
 
-exports.createAuthToken = async (request, response) => {
+exports.createAuthToken = (request, response) => {
   const db = getFirestore();
   const auth = getAuth();
 
@@ -12,17 +12,18 @@ exports.createAuthToken = async (request, response) => {
   const oneTimeCode = query["ot-auth-code"];
   const idToken = query["id-token"];
 
-  const decodedToken = await auth.verifyIdToken(idToken);
+  return auth.verifyIdToken(idToken)
+      .then((decodedToken) => {
+        const uid = decodedToken.uid;
 
-  const uid = decodedToken.uid;
-
-  const authToken = await auth.createCustomToken(uid);
-
-  console.log("Authentication token", authToken);
-
-  await setDoc(doc(db, "ot-auth-codes", oneTimeCode), authToken);
-
-  return response.status(200).send({
-    token: authToken,
-  });
+        auth.createCustomToken(uid)
+            .then((authToken) => {
+              setDoc(doc(db, "ot-auth-codes", oneTimeCode), authToken)
+                  .then(() => {
+                    return response.status(200).send({
+                      token: authToken,
+                    });
+                  });
+            });
+      });
 };
