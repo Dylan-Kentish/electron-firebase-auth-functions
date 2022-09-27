@@ -1,10 +1,13 @@
-const {initializeApp} = require("firebase-admin/app");
+const {initializeApp, applicationDefault} = require("firebase-admin/app");
 const {getAuth} = require("firebase-admin/auth");
-const {getFirestore, doc, setDoc} = require("firebase/firestore");
-
-initializeApp();
+const {getFirestore} = require("firebase-admin/firestore");
 
 exports.createAuthToken = (request, response) => {
+  console.log("createAuthToken");
+  initializeApp({
+    credential: applicationDefault(),
+  });
+
   const db = getFirestore();
   const auth = getAuth();
 
@@ -18,7 +21,7 @@ exports.createAuthToken = (request, response) => {
 
         auth.createCustomToken(uid)
             .then((authToken) => {
-              setDoc(doc(db, "ot-auth-codes", oneTimeCode), authToken)
+              db.doc(`ot-auth-codes/${oneTimeCode}`).set({authToken})
                   .then(() => {
                     return response.status(200).send({
                       token: authToken,
