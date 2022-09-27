@@ -4,7 +4,7 @@ const {createAuthToken} = require("./createAuthToken");
 const cors = require("cors");
 
 // Set up a whitelist and check against it:
-const whitelist = ["http://electron-authentication.firebaseapp.com"];
+const whitelist = ["https://electron-authentication.web.app/"];
 const corsOptions = {
   origin: function(origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
