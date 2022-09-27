@@ -1,10 +1,10 @@
-const { initializeApp } = require("firebase-admin/app");
-const { getAuth } = require("firebase-admin/auth");
-const { getFirestore, doc, setDoc } = require("firebase/firestore");
+const {initializeApp} = require("firebase-admin/app");
+const {getAuth} = require("firebase-admin/auth");
+const {getFirestore, doc, setDoc} = require("firebase/firestore");
 
 initializeApp();
 
-exports.createAuthToken = (request, response) => {
+exports.createAuthToken = async (request, response) => {
   const db = getFirestore();
   const auth = getAuth();
 
