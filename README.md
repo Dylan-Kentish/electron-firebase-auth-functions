@@ -1,4 +1,4 @@
-# electron-firebase-auth-functions
+# firebase-auth-functions
 
 This repository demonstrates using the firebase-admin SDK. 
 
