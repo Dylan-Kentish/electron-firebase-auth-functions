@@ -1,6 +1,6 @@
 const functions = require("firebase-functions");
 const app = require("express")();
-const {customToken} = require("./createAuthToken");
+const {customToken} = require("./customToken");
 const cors = require("cors");
 const {auth}= require("./firebase");
 
