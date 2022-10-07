@@ -1,6 +1,6 @@
 # firebase-auth-functions
 
-This repository demonstrates using the firebase-admin SDK. 
+This repository demonstrates using the firebase-admin SDK, for authentication within firebase functions. 
 
 This repository requires that the default Firebase Service Account has the "Service Account Token Creator".
 
